@@ -10,7 +10,7 @@ const SearchInput = ({ value, onChange, onSubmit }) => {
   return (
     <div className="flex justify-center">
         <div className="w-full max-w-3xl">
-            <div className="bg-gray-700 bg-opacity-80 backdrop-blur-lg rounded-2xl p-4 flex items-center space-x-4 shadow-2xl border border-white border-opacity-20">
+            <div className="dark:bg-gray-800 dark:border-gray-700 bg-opacity-80 backdrop-blur-lg rounded-2xl p-4 flex items-center space-x-4 shadow-2xl border border-white border-opacity-20">
                 <div className="flex-shrink-0">
                     <FaPlus className="w-6 h-6 text-gray-400" />
                 </div>
@@ -20,7 +20,7 @@ const SearchInput = ({ value, onChange, onSubmit }) => {
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     onClick={handleKeyPress}
-                    className="flex-1 bg-transparent text-white placeholder-gray-400 text-lg outline-none"
+                    className="flex-1 bg-transparent text-white text-lg outline-none"
                 />
                 <div className="flex-shrink-0">
                     <FaMicrophone className="w-6 h-6 text-gray-400 cursor-pointer" />
