@@ -1,113 +1,109 @@
 "use client";
 
-import React, { useState } from "react";
-import { FaUser } from "react-icons/fa";
-import SearchInput from "../components/SearchInput";
+import React, { useEffect, useState } from "react";
+import { FaRobot, FaUser } from "react-icons/fa";
 import BackendResponse from "../components/BackendResponse";
+// import QueryRepresentation from "../components/QueryRepresentation";
 
-const jsonResponse = [
-  {
-    claim: "Manushi Chillar is not Miss Universe",
-    verdict: "true",
-    confidence: 95,
-    explanation:
-      "The claim that Manushi Chhillar is not Miss Universe is supported by the evidence. Manushi Chhillar is widely recognized as the winner of the Miss World 2017 pageant, not Miss Universe. Both her biography on IMDb and her profile on BookMyShow explicitly state that she won the Miss World 2017 title after representing Haryana at the Femina Miss India 2017 pageant [1, 2]. She is the sixth Indian woman to have won the Miss World crown. Therefore, the distinction between Miss World and Miss Universe is crucial, and the claim correctly states she does not hold the Miss Universe title.",
-    sources: [
-      "https://www.imdb.com/name/nm10035940/bio/",
-      "https://in.bookmyshow.com/person/manushi-chhillar/2015213",
-    ],
-    techniques: [],
-    checklist: [
-      "Always verify specific titles or awards, as different pageants exist (e.g., Miss World vs. Miss Universe).",
-      "Consult multiple reputable biographical sources to confirm factual details.",
-      "Pay attention to keywords and specific terms in claims to avoid confusion.",
-    ],
-  },
-];
 
-const Result = () => {
-  const [messages, setMessages] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+const Result = ({ query, onBack }) => {
+  const [backendResponse, setBackendResponse] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (text) => {
-    if (!text.trim()) return;
+  const messages = [
+    {
+      id : 1,
+      text: query,
+      isUser: true
+    },
+  ];
 
-    const userMessage = {
-      isValid: true,
-      id: Date.now().toString(),
-      text,
-      isUser: true,
-      timestamp: new Date(),
+  useEffect(() => {
+    if (!query) return;
+
+    const fetchResponse = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch("https://satyashield-backend-60le.onrender.com/api/run_agent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
+        const data = await res.json();
+        setBackendResponse(data[0]); 
+      } 
+      catch (err) {
+        console.error(err);
+      } 
+      finally {
+        setIsLoading(false);
+      }
     };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue("");
-
-    setTimeout(() => {
-      const botMessage = {
-        isValid: true,
-        id: (Date.now() + 1).toString(),
-        text: `Based on my analysis, I need to verify this information. Please wait while I check multiple sources.`,
-        isUser: false,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, botMessage]);
-    }, 1000);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(inputValue);
-    }
-  };
+    fetchResponse();
+  }, [query]);
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <div className="w-full bg-card flex flex-col">
-        {/* Messages */}
-        <div className="flex-1 p-4 overflow-y-auto">
+    <div className="min-h-screen bg-gray-950 flex flex-col">
+      <div className="flex-1 p-4 overflow-y-auto">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* Chat Opener */}
           <div className="space-y-4">
             {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
-              >
-                <div className="flex items-start space-x-2 max-w-xs">
+              <div key={message.id} className={`flex ${ message.isUser ? "justify-end" : "justify-start"}`}>
+                <div className="flex items-start space-x-2 max-w-lg">
                   {!message.isUser && (
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-primary-foreground text-sm">🤖</span>
+                    <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-sm"><FaRobot/></span> 
+                      {/* Abhi nahi aa raha hai, fix this! */}
                     </div>
                   )}
-                  <div
-                    className={`px-4 py-2 rounded-2xl ${
-                      message.isUser
-                        ? "bg-primary text-primary-foreground ml-2"
-                        : "bg-muted text-foreground"
-                    }`}
-                  >
-                    <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                  <div className="px-4 py-2 rounded-2xl  border-gray-900 bg-gray-700 text-white ml-2">
+                    <p className="text-sm whitespace-pre-wrap">
+                      {message.text}
+                    </p>
                   </div>
                   {message.isUser && (
-                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
-                      <FaUser className="w-4 h-4 text-secondary-foreground" />
+                    <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                      <FaUser className="w-4 h-4 text-gray-300" />
                     </div>
                   )}
                 </div>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* ✅ Fact-check response aligned mid-left */}
-        <div className="p-4 flex justify-start">
-          <div className="ml-16"> {/* push it slightly to the center-left */}
-            <BackendResponse jsonResponse={jsonResponse} />
-          </div>
-        </div>
+          {/* Query Representation */}
+          {/* Abhi nahi chahiye when we up it we will see */}
+          {/* <div className="flex justify-start">
+            <div className="ml-10">
+              <QueryRepresentation query={query} />
+            </div>
+          </div> */}
 
-        <div className="mb-4">
-          <SearchInput />
+          {/* Backend Response */}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="flex ml-10">
+                <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                  <FaRobot className="w-4 h-4 text-gray-300" />
+                </div>
+                <div className= "border-gray-900 bg-gray-700 rounded-2xl p-6 backdrop-blur-sm">
+                  <div className="flex items-center gap-2">
+                    {/* <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div> */}
+                    <span className="text-gray-300">Give us a moment we will check!</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {backendResponse && (
+            <div className="flex justify-start">
+              <div className="ml-10">
+                <BackendResponse jsonResponse={backendResponse} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

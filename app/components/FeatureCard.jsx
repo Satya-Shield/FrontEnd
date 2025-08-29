@@ -24,13 +24,14 @@ const FeatureCard = ({ type }) => {
   if (!config) return null;
 
   return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-sm p-6 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
       {config.icon}
-      <a href="#">
-        <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{config.title}</h5>
-      </a>
-      <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">{config.description}</p>
+      <h5 className="mb-2 text-2xl font-semibold tracking-tight text-white">
+        {config.title}
+      </h5>
+      <p className="mb-3 font-normal text-gray-300">{config.description}</p>
     </div>
+
   );
 };
 

@@ -11,12 +11,18 @@ import {
 } from 'react-icons/fa';
 
 const BackendResponse = ({ jsonResponse }) => {
-    const response = jsonResponse[0];
+
+    if(jsonResponse.length===0){
+        return null;
+    }
+    const response = jsonResponse;
     // Later : Add animation to the confidence bar
     const [confidenceBar, setConfidenceBar] = useState(0);
     const [checkedItems, setCheckedItems] = useState({});
 
     const getColorScheme = () => {
+        if(!response) return null;
+
         if(response.verdict==="true" && response.confidence>=80) {
             return {
                 gradient: 'from-emerald-500/20 to-green-500/10',
@@ -28,7 +34,7 @@ const BackendResponse = ({ jsonResponse }) => {
                 progressBg: 'bg-emerald-500',
             };
         } 
-        else if (response.verdict === "Refuted" && response.confidence <= 60) {
+        else if (response.verdict==="false" && response.confidence>=80) {
             return {
                 gradient: 'from-red-500/20 to-rose-500/10',
                 border: 'border-red-500/30',
@@ -56,10 +62,10 @@ const BackendResponse = ({ jsonResponse }) => {
     const IconComponent = colorScheme.icon;
 
     // Hard coding right now to see how it looks
-    const techniques = ["Sources", "Google", "Reddit", "Twitter"];
+    const techniques = response.techniques || [];
 
 
-    const checklist = response.checklist;
+    const checklist = response.checklist || [];
 
     const handleCheckboxChange = (index) => {
         setCheckedItems(prev => ({ ...prev, [index]: !prev[index]}));
@@ -70,18 +76,18 @@ const BackendResponse = ({ jsonResponse }) => {
             setConfidenceBar(response.confidence);
             }, 500);
             return () => clearTimeout(timer);
-        }, [response.confidence]);
+    }, [response.confidence]);
 
-  return (
-    <div className={`${colorScheme.border} relative space-y-1 p-4 rounded-2xl border-gray-700 bg-gray-900/60 backdrop-blur-lg shadow-lg w-[600px]`}>
-        <div className={`absolute inset-0 bg-gradient-to-br ${colorScheme.gradient} opacity-50 rounded-2xl`} />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent rounded-2xl" />
+    return (
+        <div className={`${colorScheme.border} relative space-y-1 p-4 rounded-2xl border-gray-700 bg-gray-900/60 backdrop-blur-lg shadow-lg w-[600px]`}>
+            <div className={`absolute inset-0 bg-gradient-to-br ${colorScheme.gradient} opacity-50 rounded-2xl`} />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent rounded-2xl" />
       
-        <div className="relative space-y-4">
-            <div className="flex items-center gap-2">
-                <FaBolt className="w-4 h-4 text-blue-400" />
-                <h3 className="text-sm uppercase tracking-wider text-blue-400">Claim To Check</h3>
-            </div>
+            <div className="relative space-y-4">
+                <div className="flex items-center gap-2">
+                    <FaBolt className="w-4 h-4 text-blue-400" />
+                    <h3 className="text-sm uppercase tracking-wider text-blue-400">Claim To Check</h3>
+                </div>
 
             {/* Claim */}
             <div className={`${colorScheme.accentBg} ${colorScheme.accentBorder} border rounded-xl p-6 backdrop-blur-sm`}>
