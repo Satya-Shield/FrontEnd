@@ -44,7 +44,7 @@ const LandingPage = () => {
         for informed choices
       </h1>
 
-      <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto font-light italic">
+      <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto font-light">
         Type your prompt, add <span className="text-white">{displayText}</span>
         <span className="animate-blink text-white">|</span> and obtain verified insights
       </p>
