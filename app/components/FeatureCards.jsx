@@ -3,10 +3,11 @@ import FeatureCard from './FeatureCard';
 
 const FeatureCards = () => {
   return (
-    <div className="grid md:grid-cols-3 gap-8 mt-16">
-      <FeatureCard type='photo'/>
-      <FeatureCard type='video'/>
-      <FeatureCard type='link'/>
+    <div className="flex flex-col items-start w-full px-6 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
+        <FeatureCard type="photo" />
+        <FeatureCard type="link" />
+      </div>
     </div>
   );
 };

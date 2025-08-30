@@ -4,17 +4,12 @@ import { FaImage, FaVideo, FaLink } from 'react-icons/fa';
 const FeatureCard = ({ type }) => {
   const cardConfig = {
     photo: {
-      icon: <FaImage className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" />,
+      icon: <FaImage className="w-7 h-7 text-white dark:text-black-400 mb-3" />,
       title: 'Add a photo to verify',
       description: 'Here we could put some detail about how we will verify the given image.'
     },
-    video: {
-      icon: <FaVideo className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" />,
-      title: 'Add a video to verify',
-      description: 'Step-by-step detail of how we verify the video we can put:'
-    },
     link: {
-      icon: <FaLink className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" />,
+      icon: <FaLink className="w-7 h-7 text-white dark:text-black-400 mb-3" />,
       title: 'Share a link to verify',
       description: 'Check out whether your link speaks the truth to you:'
     }

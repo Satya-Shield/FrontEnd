@@ -37,8 +37,8 @@ const LandingPage = () => {
   }, [displayText, typing, currentWord]);
 
   return (
-    <div className="text-center space-y-3 mt-20">
-      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-white bg-clip-text text-transparent leading-tight">
+    <div className="relative container mx-auto px-4 py-16 text-center">
+      <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6 font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight">
         AI-powered verification
         <br />
         for informed choices

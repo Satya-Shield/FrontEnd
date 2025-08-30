@@ -1,49 +1,46 @@
-import React from 'react'
-import { FaMicrophone, FaPlus, FaPaperPlane } from 'react-icons/fa'
-const SearchInput = ({ value, onChange, onSubmit }) => {
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter' && onSubmit) {
-            onSubmit(value);
-        }
-    };
+"use client";
 
-    return (
-        <div className="flex justify-center">
-            <div className="w-full max-w-3xl">
-                <div className="dark:bg-gray-800 dark:border-gray-700 bg-opacity-80 backdrop-blur-lg rounded-2xl p-4 flex items-center space-x-4 shadow-2xl border border-white border-opacity-20">
-                    <div className="flex-shrink-0">
-                        <FaPlus className="w-6 h-6 text-gray-400" />
-                    </div>
-                <input 
-                    type="text" 
-                    placeholder="Type Something..." 
-                    value={value}
-                    onChange={(e) => onChange(e.target.value)}
-                    onClick={handleKeyPress}
-                    className="flex-1 bg-transparent text-white text-lg outline-none"
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") onSubmit(value);
-                    }}
-                />
+import React, { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
-                {value && value.trim() ? (
-                    <div className='flex space-x-5'>
-                        <FaPaperPlane
-                            className="w-5 h-5 text-gray-500 cursor-pointer ml-2"
-                            onClick={() => onSubmit(value)}
-                        />
-                        <FaMicrophone className="w-5 h-5 text-gray-500 ml-2 cursor-pointer" />
-                    </div>
-                    ) : (
-                        <FaMicrophone className="w-5 h-5 text-gray-500 ml-2 cursor-pointer" />
-                    )
-                }
-                
-            </div>
+const SearchInput = ({ onSearch }) => {
+  const [inputText, setInputText] = useState("");
+
+  const handleSearch = () => {
+    if (inputText.trim()) {
+      onSearch(inputText);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-start justify-start w-full mt-8 px-6">
+      {/* Box shifted left and limited max-width */}
+      <div className="bg-gray-800 backdrop-blur-lg border border-gray-700 rounded-2xl p-6 w-full max-w-2xl shadow-lg">
+        <h3 className="text-xl font-semibold mb-4 text-white">
+          Quick Fact Check 
+        </h3>
+
+        <div className="space-y-4">
+          <textarea
+            placeholder="Enter your claim here to verify..."
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            className="w-full min-h-[110px] bg-black border border-gray-600 rounded-lg text-white placeholder:text-white-400 p-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-600"
+          />
+
+          {/* Gradient theme button */}
+          <button
+            onClick={handleSearch}
+            className="w-full flex items-center justify-center gap-2 bg-black hover:opacity-90 transition rounded py-3 text-base font-medium shadow-md text-white"
+            
+          >
+            <FaSearch className="w-4 h-4" />
+            Verify Claim
+          </button>
         </div>
+      </div>
     </div>
   );
 };
 
-
-export default SearchInput
+export default SearchInput;
