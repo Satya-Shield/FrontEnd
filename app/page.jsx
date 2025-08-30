@@ -7,6 +7,12 @@ import BackgroundEffects from "./components/BackgroundEffects";
 import BackendResponse from "./components/BackendResponse";
 // import { FaSearch } from "react-icons/fa";
 import SearchInput from "./components/SearchInput";
+
+// TODO : 
+// BRING IN AN ANIMATED EFFECT TO THE RESPONSE 
+// MODIFY THE ICONS FOR THE SEARCH INPUT BAR 
+// GET TO KNOW HOW ACTUALLY ARE WE PLANNING TO SEND IMAGE TO BACKEND 
+
 const Page = () => {    
   const [searchQuery, setSearchQuery] = useState("");
   const [inputText, setInputText] = useState("");

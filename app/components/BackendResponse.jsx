@@ -10,6 +10,10 @@ import {
     FaCogs
 } from 'react-icons/fa';
 
+// TODO : 
+// BRING IN AN ANIMATED EFFECT TO THE RESPONSE 
+// MODIFY THE ICONS FOR THE SEARCH INPUT BAR 
+// GET TO KNOW HOW ACTUALLY ARE WE PLANNING TO SEND IMAGE TO BACKEND
 const BackendResponse = ({ jsonResponse }) => {
 
     if(jsonResponse.length===0){
