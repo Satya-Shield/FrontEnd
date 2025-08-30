@@ -12,7 +12,7 @@ import SearchInput from "./components/SearchInput";
 // BRING IN AN ANIMATED EFFECT TO THE RESPONSE 
 // MODIFY THE ICONS FOR THE SEARCH INPUT BAR 
 // GET TO KNOW HOW ACTUALLY ARE WE PLANNING TO SEND IMAGE TO BACKEND 
-
+// Swictch confidence level from useeffect to usestate 
 const Page = () => {    
   const [searchQuery, setSearchQuery] = useState("");
   const [inputText, setInputText] = useState("");
