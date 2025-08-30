@@ -23,7 +23,7 @@ const BackendResponse = ({ jsonResponse }) => {
     const getColorScheme = () => {
         if(!response) return null;
 
-        if(response.verdict==="true" && response.confidence>=80) {
+        if(response.verdict==="True" && response.confidence>=80) {
             return {
                 gradient: 'from-emerald-500/20 to-green-500/10',
                 border: 'border-emerald-500/30',
@@ -34,7 +34,7 @@ const BackendResponse = ({ jsonResponse }) => {
                 progressBg: 'bg-emerald-500',
             };
         } 
-        else if (response.verdict==="false" && response.confidence>=80) {
+        else if (response.verdict==="False" && response.confidence>=80) {
             return {
                 gradient: 'from-red-500/20 to-rose-500/10',
                 border: 'border-red-500/30',
@@ -64,7 +64,7 @@ const BackendResponse = ({ jsonResponse }) => {
     // Hard coding right now to see how it looks
     const techniques = response.techniques || [];
 
-
+    const sources = response.sources || [];
     const checklist = response.checklist || [];
 
     const handleCheckboxChange = (index) => {
@@ -79,9 +79,9 @@ const BackendResponse = ({ jsonResponse }) => {
     }, [response.confidence]);
 
     return (
-        <div className={`${colorScheme.border} relative space-y-1 p-4 rounded-2xl border-gray-700 bg-gray-900/60 backdrop-blur-lg shadow-lg w-[600px]`}>
-            <div className={`absolute inset-0 bg-gradient-to-br ${colorScheme.gradient} opacity-50 rounded-2xl`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent rounded-2xl" />
+        <div className={`${colorScheme.border} relative p-4 rounded-2xl border-gray-700 bg-gray-900/60 backdrop-blur-lg shadow-lg w-[600px]`}>
+            <div className={`absolute inset-0 bg-gray-800 border border-gray-700 opacity-50 rounded-2xl`} />
+            <div className="absolute inset-0  bg-gray-800 border border-gray-700 rounded-2xl" />
       
             <div className="relative space-y-4">
                 <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ const BackendResponse = ({ jsonResponse }) => {
                 </p>
             </div>
 
-        {/* Verdict + Confidence Level */}
+        {/* Verdict and Confidence Level */}
             <div className="grid grid-cols-2 gap-6">
             
                 <div className="space-y-3">
@@ -129,7 +129,6 @@ const BackendResponse = ({ jsonResponse }) => {
                 </div>
             </div>
 
-        {/* Techniques */}
         <div className="space-y-3">
             <div className="flex items-center gap-2">
                 <FaCogs className="w-4 h-4 text-indigo-400" />
@@ -147,7 +146,6 @@ const BackendResponse = ({ jsonResponse }) => {
             </div>
         </div>
 
-        {/* Analysis */}
         <div className="space-y-3">
             <div className="flex items-center gap-2">
                 <FaBrain className="w-4 h-4 text-purple-400" />
@@ -160,7 +158,6 @@ const BackendResponse = ({ jsonResponse }) => {
             </div>
         </div>
 
-        {/* Sources */}
         <div className="space-y-3">
             <div className="flex items-center gap-2">
                 <FaExternalLinkAlt className="w-4 h-4 text-cyan-400" />
