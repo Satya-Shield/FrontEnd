@@ -3,18 +3,25 @@
 import React, { useState } from "react";
 import { FaSearch, FaSpinner } from "react-icons/fa";
 
-const SearchInput = ({ onSearch, loading, searchQuery, setSearchQuery }) => {
+const SearchInput = ({ onSearch, loading, searchQuery, setSearchQuery, selectedFile, selectedUrl, onClearFile, onClearUrl }) => {
   const [inputValue, setInputValue] = useState(searchQuery || "");
 
   const handleSubmit = (e) => {
-    console.log("Submit button was clicked")
+    // console.log("Submit button was clicked")
+    console.log('Submit button was clicked with the search data : ', e);
+    // e doesnt show the things we have placed in the request 
     e.preventDefault();
     if(inputValue.trim() && !loading){
-        onSearch(inputValue.trim());
-        setInputValue("")
-        if(setSearchQuery){
-            setSearchQuery("")
-        }
+      const query = inputValue.trim();
+        onSearch({
+          query,
+          file : selectedFile,
+          url : selectedUrl
+        });
+        // setInputValue("")
+        // if(setSearchQuery){
+        //     setSearchQuery("")
+        // }
     }
   }
 

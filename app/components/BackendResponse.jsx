@@ -25,9 +25,10 @@ const BackendResponse = ({ jsonResponse }) => {
     const [checkedItems, setCheckedItems] = useState({});
 
     const getColorScheme = () => {
+        console.log("Response in hai .. checking for the color scheme");
         if(!response) return null;
 
-        if(response.verdict==="True" && response.confidence>=80) {
+        if(response.verdict==="True" && response.confidence>=60) {
             return {
                 gradient: 'from-emerald-500/20 to-green-500/10',
                 border: 'border-emerald-500/30',
@@ -38,7 +39,7 @@ const BackendResponse = ({ jsonResponse }) => {
                 progressBg: 'bg-emerald-500',
             };
         } 
-        else if (response.verdict==="False" && response.confidence>=80) {
+        else if (response.verdict==="False" && response.confidence>=60) {
             return {
                 gradient: 'from-red-500/20 to-rose-500/10',
                 border: 'border-red-500/30',

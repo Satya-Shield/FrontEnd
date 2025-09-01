@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const words = ['photo', 'video', 'link'];
+const words = ['photo', 'link'];
 
 const LandingPage = () => {
   const [currentWord, setCurrentWord] = useState(0);
