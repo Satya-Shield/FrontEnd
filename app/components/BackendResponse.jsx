@@ -197,23 +197,12 @@ const BackendResponse = ({ jsonResponse }) => {
             <div className="bg-gray-800/60 border border-gray-600/50 rounded-xl p-4 backdrop-blur-sm space-y-3">
                 {checklist.map((item, index) => (
                     <div key={index} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 mt-1">
-                            <input
-                                type="checkbox"
-                                id={`checklist-${index}`}
-                                checked={checkedItems[index] || false}
-                                onChange={() => handleCheckboxChange(index)}
-                                className="w-4 h-4 rounded border-gray-500 bg-gray-700 text-emerald-500 focus:ring-emerald-500 focus:ring-2"
-                            />
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center">
+                            <span className="text-xs text-cyan-400">{index + 1}</span>
                         </div>
-                        <label
-                        htmlFor={`checklist-${index}`}
-                        className={`text-sm leading-relaxed cursor-pointer transition-colors duration-200 ${
-                            checkedItems[index] ? 'text-emerald-300 line-through' : 'text-gray-300'
-                        }`}
-                        >
+                        
                         {item}
-                        </label>
+
                     </div>
                 ))}
             </div>

@@ -10,6 +10,7 @@ import SearchInput from "./components/SearchInput";
 
 // TODO : 
 // BRING IN AN ANIMATED EFFECT TO THE RESPONSE 
+// (done) Remove the checkboxes from the verification checklist 
 // The icon near the verify claim needs to be fixed
 // MODIFY THE ICONS FOR THE SEARCH INPUT BAR 
 // GET TO KNOW HOW ACTUALLY ARE WE PLANNING TO SEND IMAGE TO BACKEND (seems to be an issue with cors, check that)

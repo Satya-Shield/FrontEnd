@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaSearch, FaSpinner } from "react-icons/fa";
+import { FaShieldAlt, FaSearch, FaSpinner } from "react-icons/fa";
 
 const SearchInput = ({ onSearch, loading, searchQuery, setSearchQuery, selectedFile, selectedUrl, onClearFile, onClearUrl }) => {
   const [inputValue, setInputValue] = useState(searchQuery || "");
@@ -37,9 +37,12 @@ const SearchInput = ({ onSearch, loading, searchQuery, setSearchQuery, selectedF
   return (
     <div className="flex flex-col items-start justify-start w-full mt-8 px-6">
       <div className="bg-gray-800 backdrop-blur-lg border border-gray-700 rounded-2xl p-6 w-full max-w-2xl shadow-lg">
-        <h3 className="text-2xl font-semibold mb-4 text-white">
-          Quick Fact Check 
-        </h3>
+        <div className="flex">
+          <FaShieldAlt className="w-5 h-5 text-whiet-400 mr-2 mt-1" />
+          <h3 className="text-2xl font-semibold mb-4 text-white">
+            Quick Fact Check 
+          </h3>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-4">
@@ -52,13 +55,13 @@ const SearchInput = ({ onSearch, loading, searchQuery, setSearchQuery, selectedF
 
                 <button type="submit" className="w-full flex items-center justify-center gap-2 bg-black hover:opacity-90 transition rounded py-3 text-xl font-semibold shadow-md text-white">
                     {loading ? (
-                        <div>
-                            <FaSpinner className="w-4 h-4 animate-spin" />
+                        <div className="flex">
+                            <FaSpinner className="w-4 h-4 animate-spin mt-1 mr-2" />
                             Verifying Claim...
                         </div>
                     ) : (
-                        <div>
-                            <FaSearch className="w-4 h-4" />
+                        <div className="flex">
+                            <FaSearch className="w-4 h-4 mt-1 mr-2" />
                             Verify Claim
                         </div>
                     )}
