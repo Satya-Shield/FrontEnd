@@ -20,7 +20,7 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedUrl, setSelectedUrl] = useState('');
-  const [jsonResponse, setJsonResponse] = useState({
+  const [jsonResponse, setJsonResponse] = useState([{
     claim: "Everything seen on the internet is true.",
     verdict: "False",
     confidence: 75,
@@ -43,7 +43,7 @@ const Page = () => {
       "Look for scientific consensus",
       "Verify with health organizations"
     ]
-  });
+  }]);
 
   const verifyAPI = async(query) => {
     console.log('Handling request for the basic query type');
@@ -64,8 +64,8 @@ const Page = () => {
       }
 
       const data = await res.json();
-      console.log(data[0])
-      setJsonResponse(data[0]);
+      console.log(data)
+      setJsonResponse(data);
     }
     catch(err){
       console.err('Error hai code mei : ', err);
@@ -102,8 +102,8 @@ const Page = () => {
       }
 
       const data = await res.json();
-      console.log('From image verification', data[0]);
-      setJsonResponse(data[0]);
+      console.log('From image verification', data);
+      setJsonResponse(data);
     }catch(err){
       console.err('From image verification', err);
 
@@ -142,8 +142,8 @@ const Page = () => {
       }
 
       const data = await res.json();
-      console.log('From url results', data[0]);
-      setJsonResponse(data[0]);
+      console.log('From url results', data);
+      setJsonResponse(data);
     }catch(err){
       console.err('Error in URL verification', err);
       setJsonResponse({

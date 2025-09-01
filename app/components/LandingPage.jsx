@@ -11,7 +11,7 @@ const LandingPage = () => {
     const current = words[currentWord];
     let timeout;
 
-    if (typing) {
+    if(typing){
         if(displayText.length < current.length) {
             timeout = setTimeout(() => {
             setDisplayText(current.slice(0, displayText.length + 1));
