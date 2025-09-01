@@ -48,7 +48,7 @@ const FeatureCard = ({ type, onFileSelect, onUrlSelect }) => {
           type="file"
           accept="image/*"
           onChange={handleFileChange}
-          className="text-white"
+          className="text-white focus:ring-blue-600"
         />
       )}
       {type === 'link' && (
@@ -57,7 +57,7 @@ const FeatureCard = ({ type, onFileSelect, onUrlSelect }) => {
           placeholder="Enter the URL"
           value={url}
           onChange={handleUrlChange}
-          className="w-full p-2 rounded bg-black text-white border border-gray-600"
+          className="w-full p-2 rounded bg-black text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
       )}
     </div>
